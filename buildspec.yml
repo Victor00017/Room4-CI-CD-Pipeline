@@ -1,0 +1,17 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      python: 3.x
+    commands:
+      - pip install checkov
+  build:
+    commands:
+      - echo "Validating CloudFormation template"
+      - aws cloudformation validate-template --template-body file://template.yaml
+      - echo "Scanning with Checkov"
+      - checkov -f template.yaml --framework cloudformation -o json > checkov_results.json
+      - checkov -f template.yaml --framework cloudformation --quiet
+artifacts:
+  files:
+    - checkov_results.json
