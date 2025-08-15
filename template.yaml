@@ -39,5 +39,4 @@ Resources:
                 Action: s3:ListBucket
                 Resource: !GetAtt MyS3Bucket.Arn
                 Condition:
-                  StringEquals:
-                    "s3:prefix": "allowed/"
+                 
