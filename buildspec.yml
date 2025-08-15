@@ -10,7 +10,7 @@ phases:
       - echo "Validating CloudFormation template"
       - aws cloudformation validate-template --template-body file://template.yaml
       - echo "Scanning with Checkov"
-      - checkov -f template.yaml --framework cloudformation -o json > checkov_results.json
+      - checkov -f template.yaml --framework cloudformation -o json > checkov_results.json || true 
       - checkov -f template.yaml --framework cloudformation --quiet
 artifacts:
   files:
