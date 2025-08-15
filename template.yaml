@@ -8,6 +8,10 @@ Resources:
       AccessControl: Private
       VersioningConfiguration:
         Status: Enabled
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
   MyIAMRole:
     Type: AWS::IAM::Role
     Properties:
