@@ -1,5 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: Simple CloudFormation template for testing CI/CD pipeline with Checkov
+
 Resources:
   MyS3Bucket:
     Type: AWS::S3::Bucket
@@ -12,6 +13,12 @@ Resources:
         ServerSideEncryptionConfiguration:
           - ServerSideEncryptionByDefault:
               SSEAlgorithm: AES256
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        IgnorePublicAcls: true
+        BlockPublicPolicy: true
+        RestrictPublicBuckets: true
+
   MyIAMRole:
     Type: AWS::IAM::Role
     Properties:
@@ -33,4 +40,4 @@ Resources:
                 Resource: !GetAtt MyS3Bucket.Arn
                 Condition:
                   StringEquals:
-                    s3:prefix: "allowed/"
+                    "s3:prefix": "allowed/"
